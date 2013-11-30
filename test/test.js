@@ -20,7 +20,7 @@ describe('gulp-grunt', function () {
     })
 
     it('should load grunt tasks', function () {
-        expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error'])
+        expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error'])
     })
 
     it('should still run gulp tasks', function () {
@@ -38,8 +38,8 @@ describe('gulp-grunt', function () {
     })
 
     it('should work with another prefix', function () {
-        addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: 'grunt-' })
-        expect(localGulp.tasks).to.have.keys(['grunt-test', 'grunt-error'])
+        addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' })
+        expect(localGulp.tasks).to.have.keys(['gr-test', 'gr-error'])
     })
 
     it('should work with no prefix', function () {
@@ -64,14 +64,14 @@ describe('gulp-grunt', function () {
         }
 
         it('should run grunt tasks', function () {
-            gulp.run('gr-test')
+            gulp.run('grunt-test')
             finish()
             expect(out[1]).to.equal('test has been run\n')
         })
 
         it('should handle errors gracefully', function () {
             gulp.env.silent = false
-            gulp.run('gr-error')
+            gulp.run('grunt-error')
             finish()
             expect(out[1]).to.have.string('Errored')
         })

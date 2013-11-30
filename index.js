@@ -4,7 +4,7 @@ module.exports = function(gulp, options) {
 
     opt = {
         base: null,
-        prefix: 'gr-'
+        prefix: 'grunt-'
     }
 
     if(options) {
