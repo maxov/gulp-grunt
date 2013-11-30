@@ -1,0 +1,35 @@
+{
+  "name": "gulp-grunt",
+  "description": "Run grunt tasks from gulp",
+  "version": "0.0.1",
+  "homepage": "http://github.com/gratimax/gulp-grunt",
+  "repository": "git://github.com/gratimax/gulp-grunt.git",
+  "author": "gratimax <max@ovsankin.com>",
+  "main": "./index.js",
+  "keywords": [
+    "gulpplugin",
+    "grunt"
+  ],
+  "dependencies": {
+    "event-stream": "*",
+    "coffee-script": "*",
+    "gulp-util": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "grunt": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/gratimax/gulp-grunt/raw/master/LICENSE"
+    }
+  ]
+}
