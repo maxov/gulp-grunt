@@ -18,7 +18,8 @@
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
-    "grunt": "*"
+    "grunt": "*",
+    "gulp": "*"
   },
   "scripts": {
     "test": "mocha"
