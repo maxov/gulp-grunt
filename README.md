@@ -61,7 +61,7 @@ require('gulp-grunt')(gulp, {
 The grunt tasks can be called from gulp, except they would have the prefix, so
 'theknightswhosay-minify' and 'theknightswhosay-compile'.
 
-You can simply pass in an empty string(`'`) if you wish to have no prefix.
+You can simply pass in an empty string(`''`) if you wish to have no prefix.
 
 ### default options
 
