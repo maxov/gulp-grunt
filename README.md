@@ -72,4 +72,6 @@ You can simply pass in an empty string(`''`) if you wish to have no prefix.
 }
 ```
 
+***
+
 Have fun grunting and gulping! :D
