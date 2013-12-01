@@ -65,16 +65,11 @@ You can simply pass in an empty string(`''`) if you wish to have no prefix.
 
 ### default options
 
-<table>
-<tr> 
-<td>base</td>
-<td>__dirname(this is of gulp-grunt when you require() it.
-Essentially just the directory your Gulpfile is in.</td>
-</tr>
-<tr>
-<td>prefix</td>
-<td>'grunt-'</td>
-</tr>
-</table>
+```js
+{
+    base: null, // this is just the directory that your Gulpfile is in
+    prefix: 'grunt-'
+}
+```
 
 Have fun grunting and gulping! :D
