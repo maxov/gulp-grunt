@@ -1,5 +1,9 @@
 # gulp-grunt
 #### Run grunt tasks from gulp
+![travis build](https://api.travis-ci.org/gratimax/gulp-grunt.png)
+
+What if your favorite grunt plugin isn't available for gulp yet? No worries! Just hook in your
+grunt configuration!
 This plugin is a bit different from most other gulp plugins.
 You cannot use it inline, because it does not create a stream.
 Rather, use it at the top of your gulpfile, calling it with your gulp as an argument.
