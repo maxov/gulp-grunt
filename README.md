@@ -16,12 +16,12 @@ var gulp = require('gulp')
 require('gulp-grunt')(gulp) // add all the gruntfile tasks to gulp
 
 // continue defining tasks...
-gulp.task('do-this', function () {
+gulp.task('do-this', function() {
     ...
 })
 
 // run them like any other task
-gulp.task('default', function () {
+gulp.task('default', function() {
     gulp.run('grunt-minify')
     gulp.run('grunt-test')
 })
