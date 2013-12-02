@@ -11,8 +11,6 @@
     "grunt"
   ],
   "dependencies": {
-    "event-stream": "*",
-    "coffee-script": "*",
     "gulp-util": "*"
   },
   "devDependencies": {
