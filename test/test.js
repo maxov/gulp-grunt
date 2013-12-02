@@ -10,21 +10,21 @@ var ran = {
     x: false
 }
 
-describe('gulp-grunt', function () {
+describe('gulp-grunt', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
         gulp = require('gulp')
         gulp.env.silent = true
         ran = ranbef
         addGrunt(gulp, { base: path.join(__dirname, 'fixtures') })
     })
 
-    it('should load grunt tasks', function () {
+    it('should load grunt tasks', function() {
         expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error'])
     })
 
-    it('should still run gulp tasks', function () {
-        gulp.task('x', function () {
+    it('should still run gulp tasks', function() {
+        gulp.task('x', function() {
             ran.x = true
         })
         gulp.run('x')
@@ -33,28 +33,28 @@ describe('gulp-grunt', function () {
 
     var localGulp
 
-    beforeEach(function () {
+    beforeEach(function() {
         localGulp = new gulp.Gulp
     })
 
-    it('should work with another prefix', function () {
+    it('should work with another prefix', function() {
         addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' })
         expect(localGulp.tasks).to.have.keys(['gr-test', 'gr-error'])
     })
 
-    it('should work with no prefix', function () {
+    it('should work with no prefix', function() {
         addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: '' })
         expect(localGulp.tasks).to.have.keys(['test', 'error'])
     })
 
-    describe('should run grunt tasks', function () {
+    describe('should run grunt tasks', function() {
 
         var out
         var write = process.stdout.write
 
-        beforeEach(function () {
+        beforeEach(function() {
             out = []
-            process.stdout.write = function (data) {
+            process.stdout.write = function(data) {
                 out.push(data)
             }
         })
@@ -63,13 +63,13 @@ describe('gulp-grunt', function () {
             process.stdout.write = write
         }
 
-        it('should run grunt tasks', function () {
+        it('should run grunt tasks', function() {
             gulp.run('grunt-test')
             finish()
             expect(out[1]).to.equal('test has been run\n')
         })
 
-        it('should handle errors gracefully', function () {
+        it('should handle errors gracefully', function() {
             gulp.env.silent = false
             gulp.run('grunt-error')
             finish()

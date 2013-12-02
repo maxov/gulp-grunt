@@ -8,7 +8,7 @@ module.exports = function(gulp, options) {
     }
 
     if(options) {
-        for (var key in options) {
+        for(var key in options) {
             opt[key] = options[key]
         }
     }
