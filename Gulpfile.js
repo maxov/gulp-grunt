@@ -2,7 +2,7 @@ var gulp = require('gulp')
 var spawn = require('child_process').spawn
 var mocha = require('mocha')
 
-gulp.task('test', function (cb) {
+gulp.task('test', function(cb) {
     spawn('cmd', ['/c', 'node_modules\\.bin\\mocha.cmd', '-R', 'spec'], {stdio: 'inherit'})
         .on('close', function() {
             cb()
