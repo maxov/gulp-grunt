@@ -12,12 +12,13 @@ var makeOptions = function(options) {
         }
     }
 
+    console.log(baseOptions)
+
     return baseOptions
 }
 
 module.exports = function(gulp, options) {
-    var opt = makeOptions(options)
-    var tasks = getTasks(opt)
+    var tasks = getTasks(options)
 
     for(var name in tasks) {
         var fn = tasks[name];
@@ -25,7 +26,8 @@ module.exports = function(gulp, options) {
     }
 }
 
-var getTasks = module.exports.tasks = function(opt) {
+var getTasks = module.exports.tasks = function(options) {
+    var opt = makeOptions(options)
 
     if(opt.base) {
         grunt.file.setBase(opt.base)
