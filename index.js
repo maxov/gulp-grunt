@@ -12,8 +12,6 @@ var makeOptions = function(options) {
         }
     }
 
-    console.log(baseOptions)
-
     return baseOptions
 }
 
