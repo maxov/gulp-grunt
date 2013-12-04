@@ -32,16 +32,31 @@ Also note that `require('gulp-grunt')(gulp)` does not have to be at the top of y
 It could very well be at the bottom, except that then it could possibly overwrite some of your
 gulp tasks.
 
-## Configuration
+## Functions
+
+### gulp-grunt()
+__Takes__ `(gulp, options)`
+
 Configuration is done with the function call:
 ```js
 require('gulp-grunt')(gulp, {
-    base: '...',
-    prefix: '...'
+    base: ...,
+    prefix: ...
 })
 ```
+This function appends all the grunt tasks it has found to your gulp object as normal gulp tasks.
 
-### options.base
+#### gulp
+Your gulp object that you imported with the code:
+```js
+var gulp = require('gulp')
+```
+Pass it in and gulp-grunt will add all the tasks.
+
+#### options
+`options` is the configuration object you pass in.
+
+#### options.base
 This tells grunt where to look for your gruntfile.
 Set it to some absolute path.
 This may require you to use `path.join` for relative paths:
@@ -51,7 +66,7 @@ require('gulp-grunt')(gulp, {
 })
 ```
 
-### options.prefix
+#### options.prefix
 This tells gulp-grunt how to prefix your tasks.
 For instance, if in the gruntfile you define the tasks 'minify' and 'compile',
 and if you pass gulp-grunt this configuration:
@@ -65,7 +80,7 @@ The grunt tasks can be called from gulp, except they would have the prefix, so
 
 You can simply pass in an empty string(`''`) if you wish to have no prefix.
 
-### default options
+#### default options
 
 ```js
 {
@@ -73,6 +88,31 @@ You can simply pass in an empty string(`''`) if you wish to have no prefix.
     prefix: 'grunt-'
 }
 ```
+
+### gulp-grunt.tasks()
+__Takes__ `(options)`
+
+This just returns all the grunt tasks found, along with their associated functions.
+Calling is essentially the same as with the main function:
+```js
+var gulp_grunt = require('gulp-grunt')
+var tasks = gulp_grunt.tasks({
+    base: ...,
+    prefix: ...
+})
+```
+Output is something like:
+```js
+{
+    'grunt-test': [Function],
+    'grunt-minify': [Function]
+    // etc...
+}
+```
+
+#### options
+This object is the exact same as for [gulp-grunt()](#gulp-grunt-1) above. 
+This tells gulp-grunt what prefix to use and what base to search for.
 
 ***
 
