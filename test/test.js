@@ -66,7 +66,7 @@ describe('gulp-grunt', function() {
         it('should run grunt tasks', function() {
             gulp.run('grunt-test')
             finish()
-            expect(out[1]).to.equal('test has been run\n')
+            expect(out).to.include('test has been run\n')
         })
 
         it('should handle errors gracefully', function() {
