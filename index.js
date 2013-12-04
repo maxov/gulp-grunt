@@ -5,14 +5,11 @@ var makeOptions = function(options) {
         base: null,
         prefix: 'grunt-'
     }
+
     if(options) {
         for(var key in options) {
             baseOptions[key] = options[key]
         }
-    }
-
-    if(baseOptions.base) {
-        grunt.file.setBase(baseOptions.base)
     }
 
     return baseOptions
@@ -20,7 +17,7 @@ var makeOptions = function(options) {
 
 module.exports = function(gulp, options) {
     var opt = makeOptions(options)
-    var tasks = getTasks(opt.prefix)
+    var tasks = getTasks(opt)
 
     for(var name in tasks) {
         var fn = tasks[name];
@@ -28,7 +25,12 @@ module.exports = function(gulp, options) {
     }
 }
 
-var getTasks = module.exports.tasks = function(prefix) {
+var getTasks = module.exports.tasks = function(opt) {
+
+    if(opt.base) {
+        grunt.file.setBase(opt.base)
+    }
+
     grunt.task.init([])
 
     var gruntTasks = grunt.task._tasks,
@@ -36,7 +38,7 @@ var getTasks = module.exports.tasks = function(prefix) {
 
     for(var name in gruntTasks) {
         var task = gruntTasks[name]
-        finalTasks[prefix + name] = task.fn
+        finalTasks[opt.prefix + name] = task.fn
     }
 
     return finalTasks;
