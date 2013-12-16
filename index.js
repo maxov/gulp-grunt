@@ -3,7 +3,8 @@ var grunt = require('grunt')
 var makeOptions = function(options) {
     baseOptions = {
         base: null,
-        prefix: 'grunt-'
+        prefix: 'grunt-',
+        verbose: false
     }
 
     if(options) {
@@ -37,8 +38,14 @@ var getTasks = module.exports.tasks = function(options) {
         finalTasks = {}
 
     for(var name in gruntTasks) {
-        var task = gruntTasks[name]
-        finalTasks[opt.prefix + name] = task.fn
+        finalTasks[opt.prefix + name] = (function (taskName) {
+            return function() {
+                opt.verbose && console.log('Runnin Grunt "'+taskName+'" task...')
+                grunt.tasks([taskName], {}, function() {
+                    opt.verbose && grunt.log.ok('Done running Grunt "'+taskName+'" task.')
+                })
+            }
+        })(name) //ensure task name proper scoping in the loop
     }
 
     return finalTasks;
