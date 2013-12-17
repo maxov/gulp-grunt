@@ -1,4 +1,4 @@
-###Node###
+# node
  
 lib-cov
 *.seed
@@ -19,3 +19,7 @@ npm-debug.log
 .DS_Store
 node_modules
 build
+
+# idea
+.idea/
+*.iml
