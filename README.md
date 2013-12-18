@@ -12,19 +12,19 @@ Rather, use it at the top of your gulpfile, calling it with your gulp as an argu
 
 ## Example usage
 ```js
-var gulp = require('gulp')
-require('gulp-grunt')(gulp) // add all the gruntfile tasks to gulp
+var gulp = require('gulp');
+require('gulp-grunt')(gulp); // add all the gruntfile tasks to gulp
 
 // continue defining tasks...
 gulp.task('do-this', function() {
     ...
-})
+});
 
 // run them like any other task
 gulp.task('default', function() {
-    gulp.run('grunt-minify')
-    gulp.run('grunt-test')
-})
+    gulp.run('grunt-minify');
+    gulp.run('grunt-test');
+});
 ```
 Note that all the grunt tasks that were added begin with the prefix 'grunt-'.
 This is for usability, so that your grunt tasks do not clash with your gulp tasks.
@@ -42,14 +42,14 @@ Configuration is done with the function call:
 require('gulp-grunt')(gulp, {
     base: ...,
     prefix: ...
-})
+});
 ```
 This function appends all the grunt tasks it has found to your gulp object as normal gulp tasks.
 
 #### gulp
 Your gulp object that you imported with the code:
 ```js
-var gulp = require('gulp')
+var gulp = require('gulp');
 ```
 Pass it in and gulp-grunt will add all the tasks.
 
@@ -63,7 +63,7 @@ This may require you to use `path.join` for relative paths:
 ```js
 require('gulp-grunt')(gulp, {
     base: require('path').join(__dirname, 'yourrelativepathhere')
-})
+});
 ```
 
 #### options.prefix
@@ -99,7 +99,7 @@ var gulp_grunt = require('gulp-grunt')
 var tasks = gulp_grunt.tasks({
     base: ...,
     prefix: ...
-})
+});
 ```
 Output is something like:
 ```js

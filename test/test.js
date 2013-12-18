@@ -1,81 +1,89 @@
 var expect = require('chai').expect;
 var path = require('path');
-var gulp = require('gulp');
+var Gulp = require('gulp').Gulp;
 var addGrunt = require('../');
 
-var ranbef = {
-    x: false
-};
-var ran = {
-    x: false
-};
+describe('gulp-grunt', function () {
 
-describe('gulp-grunt', function() {
+    var gulp;
 
-    beforeEach(function() {
-        gulp = require('gulp');
-        gulp.env.silent = true;
-        ran = ranbef;
-        addGrunt(gulp, { base: path.join(__dirname, 'fixtures') })
+    /*
+        This function essentially takes a function and 'silences' it.
+        This means that all the output will be logged to an array('out') instead of stdout.
+        If the function only takes one parameter,
+        that array will be passed in and the function will be synchronous.
+        If the function takes two parameters(the array and a callback),
+        everything is done asynchronously.
+        This also has the advantage of making the output look very clean.
+    */
+    var silence = function (silenced) {
+        return function (cb) {
+            var out = [],
+                // everything back to normal
+                revert = (function (write) {
+                    return function () {
+                        process.stdout.write = write;
+                    }
+                })(process.stdout.write);
+
+            // modify process.stdout
+            process.stdout.write = function (string) {
+                out.push(string);
+            };
+
+            if(silenced.length == 1) {
+                // If the function is synchronous
+                silenced(out);
+                revert();
+                cb();
+            } else if(silenced.length == 2) {
+                // If the function is asynchronous
+                silenced(out, function () {
+                    revert();
+                    cb();
+                });
+            }
+
+        }
+    };
+
+    beforeEach(function () {
+        gulp = new Gulp;
     });
 
-    it('should load grunt tasks', function() {
-        expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error'])
+    it('should load grunt tasks', function () {
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
+        expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error']);
     });
 
-    it('should still run gulp tasks', function() {
-        gulp.task('x', function() {
-            ran.x = true
+    it('should still run gulp tasks', silence(function (out) {
+        var ran = false;
+
+        gulp.task('x', function () {
+            ran = true;
         });
         gulp.run('x');
-        expect(ran.x).to.be.true;
+        expect(ran).to.be.true;
+    }));
+
+    it('should work with another prefix', function () {
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' });
+        expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error']);
     });
 
-    var localGulp;
-
-    beforeEach(function() {
-        localGulp = new gulp.Gulp
+    it('should work with no prefix', function () {
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: '' });
+        expect(gulp.tasks).to.have.keys(['test', 'error']);
     });
 
-    it('should work with another prefix', function() {
-        addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' });
-        expect(localGulp.tasks).to.have.keys(['gr-test', 'gr-error'])
-    });
+    it('should run grunt tasks', silence(function (out, done) {
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
 
-    it('should work with no prefix', function() {
-        addGrunt(localGulp, { base: path.join(__dirname, 'fixtures'), prefix: '' });
-        expect(localGulp.tasks).to.have.keys(['test', 'error'])
-    });
-
-    describe('should run grunt tasks', function() {
-
-        var out,
-            write = process.stdout.write;
-
-        beforeEach(function() {
-            out = [];
-            process.stdout.write = function(data) {
-                out.push(data)
-            }
+        gulp.run('grunt-test', function () {
+            expect(out).to.include('[test] you should probably see that it has tested\n');
+            done();
         });
 
-        var finish = function() {
-            process.stdout.write = write
-        };
-
-        it('should run grunt tasks', function() {
-            gulp.run('grunt-test');
-            finish();
-            expect(out).to.include('test has been run\n')
-        });
-
-        it('should handle errors gracefully', function() {
-            gulp.env.silent = false;
-            gulp.run('grunt-error');
-            finish();
-            expect(out[1]).to.have.string('Errored')
-        });
-
-    });
+    }));
 
 });

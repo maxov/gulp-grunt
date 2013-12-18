@@ -11,13 +11,13 @@
     "grunt"
   ],
   "dependencies": {
-    "gulp-util": "*"
+    "gulp-util": "~2.1.4"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "grunt": "*",
-    "gulp": "*"
+    "mocha": "~1.15.1",
+    "chai": "~1.8.1",
+    "grunt": "~0.4.2",
+    "gulp": "~3.1.4"
   },
   "scripts": {
     "test": "mocha"

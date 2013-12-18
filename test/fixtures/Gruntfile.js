@@ -1,10 +1,11 @@
 module.exports = function(grunt) {
 
     grunt.registerTask('test', 'does blah', function() {
-        console.log('test has been run')
+        console.log('[test] you should probably see that it has tested');
     });
 
     grunt.registerTask('error', 'makes an error', function() {
-        throw new Error('you should not see this error')
+        grunt.log.error('[test] you should see this error');
+        return false;
     });
 };
