@@ -10,7 +10,7 @@ var makeOptions = function (options) {
 
     if (options) {
         for (var key in options) {
-            if(options.hasOwnProperty(key)) {
+            if (options.hasOwnProperty(key)) {
                 baseOptions[key] = options[key];
             }
         }
@@ -23,7 +23,7 @@ module.exports = function (gulp, options) {
     var tasks = getTasks(options);
 
     for (var name in tasks) {
-        if(tasks.hasOwnProperty(name)) {
+        if (tasks.hasOwnProperty(name)) {
             var fn = tasks[name];
             gulp.task(name, fn);
         }
@@ -44,23 +44,18 @@ var getTasks = module.exports.tasks = function (options) {
         finalTasks = {};
 
     for (var name in gruntTasks) {
-        if(gruntTasks.hasOwnProperty(name)) {
+        if (gruntTasks.hasOwnProperty(name)) {
             (function (name) {
                 finalTasks[opt.prefix + name] = function (cb) {
                     if (opt.verbose) {
                         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
                     }
-                    try {
-                        grunt.tasks([name], { force: true }, function () {
-                            if (opt.verbose) {
-                                grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
-                            }
-                            cb();
-                        });
-                    } catch (e) {
-                        console.err(e);
+                    grunt.tasks([name], { force: true }, function () {
+                        if (opt.verbose) {
+                            grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
+                        }
                         cb();
-                    }
+                    });
                 };
             })(name);
         }
