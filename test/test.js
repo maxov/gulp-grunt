@@ -77,7 +77,7 @@ describe('gulp-grunt', function () {
     });
 
     it('should run grunt tasks', silence(function (out, done) {
-        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
 
         gulp.run('grunt-test', function () {
             expect(out).to.include('[test] you should probably see that it has tested\n');

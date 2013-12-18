@@ -80,12 +80,17 @@ The grunt tasks can be called from gulp, except they would have the prefix, so
 
 You can simply pass in an empty string(`''`) if you wish to have no prefix.
 
+#### options.verbose
+If this option is enabled(true), then gulp-grunt will tell you when it starts running a Grunt task or stops it.
+This option is mainly for debugging.
+
 #### default options
 
 ```js
 {
     base: null, // this is just the directory that your Gulpfile is in
-    prefix: 'grunt-'
+    prefix: 'grunt-',
+    verbose: false
 }
 ```
 
@@ -112,7 +117,7 @@ Output is something like:
 
 #### options
 This object is the exact same as for [gulp-grunt()](#gulp-grunt-1) above. 
-This tells gulp-grunt what prefix to use and what base to search for.
+This tells gulp-grunt what prefix to use and what base to search for, among other things.
 
 ***
 
