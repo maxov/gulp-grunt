@@ -20,7 +20,7 @@
     "gulp": "~3.1.4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R spec"
   },
   "engines": {
     "node": ">= 0.8.0"
