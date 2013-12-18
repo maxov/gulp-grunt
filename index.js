@@ -28,6 +28,7 @@ module.exports = function (gulp, options) {
             gulp.task(name, fn);
         }
     }
+
 };
 
 var getTasks = module.exports.tasks = function (options) {
@@ -49,12 +50,17 @@ var getTasks = module.exports.tasks = function (options) {
                     if (opt.verbose) {
                         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
                     }
-                    grunt.tasks([name], {}, function () {
-                        if (opt.verbose) {
-                            grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
-                        }
+                    try {
+                        grunt.tasks([name], { force: true }, function () {
+                            if (opt.verbose) {
+                                grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
+                            }
+                            cb();
+                        });
+                    } catch (e) {
+                        console.err(e);
                         cb();
-                    });
+                    }
                 };
             })(name);
         }

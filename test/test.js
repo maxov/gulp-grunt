@@ -38,12 +38,26 @@ describe('gulp-grunt', function () {
                 cb();
             } else if(silenced.length == 2) {
                 // If the function is asynchronous
-                silenced(out, function () {
+                silenced(out, function (err) {
                     revert();
-                    cb();
+                    if(err) {
+                        cb(err);
+                    } else {
+                        cb();
+                    }
                 });
             }
 
+        }
+    };
+
+    // Encapsulate the expect clauses on asynchronous silenced functions.
+    var clause = function (fn, done) {
+        try {
+            fn();
+            done();
+        } catch (e) {
+            done(e);
         }
     };
 
@@ -77,11 +91,29 @@ describe('gulp-grunt', function () {
     });
 
     it('should run grunt tasks', silence(function (out, done) {
-        addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
 
         gulp.run('grunt-test', function () {
-            expect(out).to.include('[test] you should probably see that it has tested\n');
-            done();
+            clause(function () {
+                expect(out).to.include('[test] you should probably see that it has tested\n');
+            }, done);
+        });
+
+    }));
+
+    it('should handle errors gracefully', silence(function (out, done) {
+        addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
+
+        gulp.run('grunt-error', function () {
+            clause(function () {
+                var errored = false;
+                for(var i = 0; i < out.length; i++) {
+                    if(out[i].indexOf("[test] you should see this error") != -1) {
+                        errored = true;
+                    }
+                }
+                expect(errored).to.be.true;
+            }, done);
         });
 
     }));

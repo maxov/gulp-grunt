@@ -9,7 +9,7 @@ gulp.task('test', function(cb) {
         });
 });
 
-gulp.task('default', function() {
+gulp.task('default', function(cb) {
     gulp.run('test');
 
     gulp.watch(['index.js', 'lib/**/*', 'test/**/*'], function() {

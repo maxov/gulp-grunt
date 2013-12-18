@@ -7,7 +7,7 @@
   "author": "gratimax <max@ovsankin.com>",
   "main": "./index.js",
   "keywords": [
-    "gulpplugin",
+    "gulpfriendly",
     "grunt"
   ],
   "dependencies": {
