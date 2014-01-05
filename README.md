@@ -1,8 +1,9 @@
-# gulp-grunt
+# [gulp](https://github.com/gulpjs/gulp)-grunt
 #### Run grunt tasks from gulp
 [![travis build](https://api.travis-ci.org/gratimax/gulp-grunt.png)](https://travis-ci.org/gratimax/gulp-grunt)
 [![dependencies](https://david-dm.org/gratimax/gulp-grunt.png)](https://david-dm.org/gratimax/gulp-grunt)
 [![dev dependencies](https://david-dm.org/gratimax/gulp-grunt/dev-status.png)](https://david-dm.org/gratimax/gulp-grunt#badge-embed=&info=devDependencies&view=table)
+[![NPM version](https://badge.fury.io/js/gulp-grunt.png)](http://badge.fury.io/js/gulp-grunt)
 
 What if your favorite grunt plugin isn't available for gulp yet? No worries! Just hook in your
 grunt configuration!
