@@ -1,6 +1,6 @@
 # [gulp](https://github.com/gulpjs/gulp)-grunt
 #### Run grunt tasks from gulp
-[![NPM version](https://badge.fury.io/js/gulp-grunt.png)](http://badge.fury.io/js/gulp-grunt)
+[![NPM version](https://badge.fury.io/js/gulp-grunt.png)](https://npmjs.org/package/gulp-grunt)
 [![travis build](https://api.travis-ci.org/gratimax/gulp-grunt.png)](https://travis-ci.org/gratimax/gulp-grunt)
 [![dependencies](https://david-dm.org/gratimax/gulp-grunt.png)](https://david-dm.org/gratimax/gulp-grunt)
 

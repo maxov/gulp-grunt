@@ -20,7 +20,7 @@
     "test": "mocha -R spec"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.9.0"
   },
   "licenses": [
     {
