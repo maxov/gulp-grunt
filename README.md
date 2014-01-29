@@ -1,5 +1,5 @@
 # [gulp](https://github.com/gulpjs/gulp)-grunt
-<img align="right" height="300" src="http://i.imgur.com/CizMVY3.png">
+<img align="right" height="300" src="http://i.imgur.com/05jWZVG.png">
 
 #### Run grunt tasks from gulp
 [![NPM version](https://badge.fury.io/js/gulp-grunt.png)](https://npmjs.org/package/gulp-grunt)
