@@ -1,14 +1,19 @@
 # [gulp](https://github.com/gulpjs/gulp)-grunt
+<img align="right" height="300" src="http://i.imgur.com/EwKGvvP.png">
+
 #### Run grunt tasks from gulp
 [![NPM version](https://badge.fury.io/js/gulp-grunt.png)](https://npmjs.org/package/gulp-grunt)
 [![travis build](https://api.travis-ci.org/gratimax/gulp-grunt.png)](https://travis-ci.org/gratimax/gulp-grunt)
 [![dependencies](https://david-dm.org/gratimax/gulp-grunt.png)](https://david-dm.org/gratimax/gulp-grunt)
 
-What if your favorite grunt plugin isn't available for gulp yet? No worries! Just hook in your
-grunt configuration!
+What if your favorite grunt plugin isn't available for gulp yet?
+Don't fret, there is nothing to worry about!
+Why don't you just hook in your grunt configuration?
+
 This plugin is a bit different from most other gulp plugins.
 You cannot use it inline, because it does not create a stream.
 Rather, use it at the top of your gulpfile, calling it with your gulp as an argument.
+This classifies gulp-grunt as _gulpfriendly_, not a gulpplugin.
 
 ## Example usage
 ```js
