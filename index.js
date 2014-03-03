@@ -50,13 +50,16 @@ var getTasks = module.exports.tasks = function (options) {
                     if (opt.verbose) {
                         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
                     }
-                    grunt.tasks([name], { force: true }, function () {
+                    grunt.util.spawn({
+                        cmd: 'grunt',
+                        args: [name, '--force']
+                    }, function() {
                         if (opt.verbose) {
                             grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
                         }
                         cb();
                     });
-                };
+            };
             })(name);
         }
     }
