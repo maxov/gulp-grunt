@@ -15,6 +15,7 @@ var makeOptions = function (options) {
             }
         }
     }
+    grunt.option('verbose', baseOptions.verbose);
 
     return baseOptions;
 };
