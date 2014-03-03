@@ -1,4 +1,5 @@
 var grunt = require('grunt');
+var spawn = require('child_process').spawn;
 
 var makeOptions = function (options) {
 
@@ -51,16 +52,19 @@ var getTasks = module.exports.tasks = function (options) {
                     if (opt.verbose) {
                         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
                     }
-                    grunt.util.spawn({
-                        cmd: 'grunt',
-                        args: [name, '--force', '--verbose=' + opt.verbose]
-                    }, function() {
+                    var child = spawn(
+                        'grunt', 
+                        [name, '--force', '--verbose=' + opt.verbose]
+                        );
+                    child.stdout.on('data', function(d) { grunt.log.write(d); });
+                    child.stderr.on('data', function(d) { grunt.log.error(d); });
+                    child.on('close', function(code) {
                         if (opt.verbose) {
                             grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
                         }
                         cb();
                     });
-            };
+                };
             })(name);
         }
     }
