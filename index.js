@@ -53,7 +53,7 @@ var getTasks = module.exports.tasks = function (options) {
                     }
                     grunt.util.spawn({
                         cmd: 'grunt',
-                        args: [name, '--force']
+                        args: [name, '--force', '--verbose=' + opt.verbose]
                     }, function() {
                         if (opt.verbose) {
                             grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
