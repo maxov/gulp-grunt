@@ -27,8 +27,12 @@ gulp.task('do-this', function() {
 
 // run them like any other task
 gulp.task('default', function() {
+    // run complete grunt tasks
     gulp.run('grunt-minify');
     gulp.run('grunt-test');
+    // or run specific targets
+    gulp.run('grunt-sass:dist');
+    gulp.run('grunt-browserify:dev');
 });
 ```
 Note that all the grunt tasks that were added begin with the prefix 'grunt-'.
@@ -36,6 +40,8 @@ This is for usability, so that your grunt tasks do not clash with your gulp task
 Also note that `require('gulp-grunt')(gulp)` does not have to be at the top of your file.
 It could very well be at the bottom, except that then it could possibly overwrite some of your
 gulp tasks.
+
+To run specific targets, use the regular grunt syntax `[task]:[target]`, as in the example above. (To learn more about Grunt targets, check out [the Grunt documentation](http://gruntjs.com/configuring-tasks#task-configuration-and-targets).)
 
 ## Functions
 
@@ -121,7 +127,7 @@ Output is something like:
 ```
 
 #### options
-This object is the exact same as for [gulp-grunt()](#gulp-grunt-1) above. 
+This object is the exact same as for [gulp-grunt()](#gulp-grunt-1) above.
 This tells gulp-grunt what prefix to use and what base to search for, among other things.
 
 ***
