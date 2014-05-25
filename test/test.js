@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var path = require('path');
 var Gulp = require('gulp').Gulp;
 var addGrunt = require('../');
+require('mocha');
 
 describe('gulp-grunt', function () {
 
@@ -66,11 +67,11 @@ describe('gulp-grunt', function () {
   });
 
   it('should load grunt tasks', function () {
-    addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});
     expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error']);
   });
 
-  it('should still run gulp tasks', silence(function (out) {
+  it('should still run gulp tasks', function () {
     var ran = false;
 
     gulp.task('x', function () {
@@ -78,10 +79,10 @@ describe('gulp-grunt', function () {
     });
     gulp.run('x');
     expect(ran).to.be.true;
-  }));
+  });
 
   it('should work with another prefix', function () {
-    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' });
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-'});
     expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error']);
   });
 
@@ -91,8 +92,7 @@ describe('gulp-grunt', function () {
   });
 
   it('should run grunt tasks', silence(function (out, done) {
-    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
-
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});
     gulp.run('grunt-test', function () {
       clause(function () {
         expect(out).to.include('[test] you should probably see that it has tested\n');
@@ -101,8 +101,8 @@ describe('gulp-grunt', function () {
 
   }));
 
-  it('should handle errors gracefully', silence(function (out, done) {
-    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), verbose: true });
+  it('should handle errors gracefully', silence(function (out,done) {
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
 
     gulp.run('grunt-error', function () {
       clause(function () {

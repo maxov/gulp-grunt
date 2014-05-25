@@ -1,6 +1,8 @@
 var grunt = require('grunt');
 var spawn = require('child_process').spawn;
 
+var gruntCmd = (process.platform === 'win32') ? 'grunt.cmd' : 'grunt'
+
 var makeOptions = function (options) {
 
     var baseOptions = {
@@ -50,14 +52,18 @@ var getTasks = module.exports.tasks = function (options) {
             if (opt.verbose) {
                 console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
             }
-            console.log(name);
             var child = spawn(
-                'grunt',
+                gruntCmd,
                 [name, '--force', '--verbose=' + opt.verbose]
                 );
-            child.stdout.on('data', function(d) { grunt.log.write(d); });
-            child.stderr.on('data', function(d) { grunt.log.error(d); });
-            child.on('close', function(code) {
+            child.stdout.on('data', function(d) {
+              grunt.log.write(d);
+            });
+            child.stderr.on('data', function(d) {
+              grunt.log.error(d);
+            });
+             child.on('close', function(code) {
+              console.log('hey!');
                 if (opt.verbose) {
                     grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
                 }
