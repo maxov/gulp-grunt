@@ -63,7 +63,6 @@ var getTasks = module.exports.tasks = function (options) {
               grunt.log.error(d);
             });
              child.on('close', function(code) {
-              console.log('hey!');
                 if (opt.verbose) {
                     grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
                 }
