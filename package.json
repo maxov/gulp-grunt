@@ -10,10 +10,12 @@
     "gulpfriendly",
     "grunt"
   ],
+  "dependencies": {
+    "grunt": "~0.4"
+  },
   "devDependencies": {
     "mocha": "~1.16",
     "chai": "~1.8",
-    "grunt": "~0.4",
     "gulp": "~3.2"
   },
   "scripts": {
