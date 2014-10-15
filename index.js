@@ -52,9 +52,16 @@ var getTasks = module.exports.tasks = function (options) {
             if (opt.verbose) {
                 console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
             }
+            var args = [name, '--force', '--verbose=' + opt.verbose];
+            for(var key in opt)
+            {
+              if(key != 'base' && key != 'prefix'){
+                args = args.concat('--' + key + '=' + opt[key]);
+              }
+            }
             var child = spawn(
                 gruntCmd,
-                [name, '--force', '--verbose=' + opt.verbose]
+                args
                 );
             child.stdout.on('data', function(d) {
               grunt.log.write(d);
