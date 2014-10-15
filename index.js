@@ -13,9 +13,7 @@ var makeOptions = function (options) {
 
     if (options) {
         for (var key in options) {
-            if (options.hasOwnProperty(key)) {
-                baseOptions[key] = options[key];
-            }
+            baseOptions[key] = options[key];
         }
     }
     grunt.option('verbose', baseOptions.verbose);
