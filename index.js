@@ -14,9 +14,11 @@ var makeOptions = function (options) {
     if (options) {
         for (var key in options) {
             baseOptions[key] = options[key];
+            if(key != 'base' && key != 'prefix'){
+              grunt.option(key, options[key]);
+            }
         }
     }
-    grunt.option('verbose', baseOptions.verbose);
 
     return baseOptions;
 };
