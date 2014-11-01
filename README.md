@@ -22,18 +22,18 @@ require('gulp-grunt')(gulp); // add all the gruntfile tasks to gulp
 
 // continue defining tasks...
 gulp.task('do-this', function() {
-    ...
+  ...
 });
 
 // run them like any other task
-gulp.task('default', function() {
-    // run complete grunt tasks
-    gulp.run('grunt-minify');
-    gulp.run('grunt-test');
-    // or run specific targets
-    gulp.run('grunt-sass:dist');
-    gulp.run('grunt-browserify:dev');
-});
+gulp.task('default', [
+  // run complete grunt tasks
+  'grunt-minify',
+  'grunt-test',
+  // or run specific targets
+  'grunt-sass:dist',
+  'grunt-browserify:dev'
+]);
 ```
 Note that all the grunt tasks that were added begin with the prefix 'grunt-'.
 This is for usability, so that your grunt tasks do not clash with your gulp tasks.
@@ -51,8 +51,8 @@ __Takes__ `(gulp, options)`
 Configuration is done with the function call:
 ```js
 require('gulp-grunt')(gulp, {
-    base: ...,
-    prefix: ...
+  base: ...,
+  prefix: ...
 });
 ```
 This function appends all the grunt tasks it has found to your gulp object as normal gulp tasks.
@@ -73,7 +73,7 @@ Set it to some absolute path.
 This may require you to use `path.join` for relative paths:
 ```js
 require('gulp-grunt')(gulp, {
-    base: require('path').join(__dirname, 'yourrelativepathhere')
+  base: require('path').join(__dirname, 'yourrelativepathhere')
 });
 ```
 
@@ -83,7 +83,7 @@ For instance, if in the gruntfile you define the tasks 'minify' and 'compile',
 and if you pass gulp-grunt this configuration:
 ```js
 require('gulp-grunt')(gulp, {
-    prefix: 'theknightswhosay-'
+  prefix: 'theknightswhosay-'
 })
 ```
 The grunt tasks can be called from gulp, except they would have the prefix, so
@@ -99,9 +99,9 @@ This option is mainly for debugging.
 
 ```js
 {
-    base: null, // this is just the directory that your Gulpfile is in
-    prefix: 'grunt-',
-    verbose: false
+  base: null, // this is just the directory that your Gulpfile is in
+  prefix: 'grunt-',
+  verbose: false
 }
 ```
 
@@ -113,16 +113,16 @@ Calling is essentially the same as with the main function:
 ```js
 var gulp_grunt = require('gulp-grunt')
 var tasks = gulp_grunt.tasks({
-    base: ...,
-    prefix: ...
+  base: ...,
+  prefix: ...
 });
 ```
 Output is something like:
 ```js
 {
-    'grunt-test': [Function],
-    'grunt-minify': [Function]
-    // etc...
+  'grunt-test': [Function],
+  'grunt-minify': [Function]
+  // etc...
 }
 ```
 
