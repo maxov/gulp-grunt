@@ -13,12 +13,12 @@ var makeOptions = function (options) {
 
     if (options) {
         for (var key in options) {
-            if (options.hasOwnProperty(key)) {
-                baseOptions[key] = options[key];
+            baseOptions[key] = options[key];
+            if(key != 'base' && key != 'prefix'){
+              grunt.option(key, options[key]);
             }
         }
     }
-    grunt.option('verbose', baseOptions.verbose);
 
     return baseOptions;
 };
@@ -52,9 +52,16 @@ var getTasks = module.exports.tasks = function (options) {
             if (opt.verbose) {
                 console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
             }
+            var args = [name, '--force', '--verbose=' + opt.verbose];
+            for(var key in opt)
+            {
+              if(key != 'base' && key != 'prefix'){
+                args = args.concat('--' + key + '=' + opt[key]);
+              }
+            }
             var child = spawn(
                 gruntCmd,
-                [name, '--force', '--verbose=' + opt.verbose]
+                args
                 );
             child.stdout.on('data', function(d) {
               grunt.log.write(d);
