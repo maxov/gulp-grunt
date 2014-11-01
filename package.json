@@ -11,12 +11,13 @@
     "grunt"
   ],
   "dependencies": {
-    "grunt": "~0.4"
+    "grunt": "^0.4.5"
   },
   "devDependencies": {
-    "mocha": "~1.16",
-    "chai": "~1.8",
-    "gulp": "~3.2"
+    "gulp-mocha": "^1.1.1",
+    "mocha": "^2.0.1",
+    "chai": "^1.9.2",
+    "gulp": "^3.8.9"
   },
   "scripts": {
     "test": "mocha -R spec"
