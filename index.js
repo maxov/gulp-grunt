@@ -61,7 +61,8 @@ var getTasks = module.exports.tasks = function (options) {
       }
       var child = spawn(
         gruntCmd,
-        args
+        args,
+        { stdio: 'ignore', 'pipe', 'pipe' }
       );
       child.stdout.on('data', function(d) {
         grunt.log.write(d);
