@@ -52,7 +52,7 @@ var getTasks = module.exports.tasks = function (options) {
       if (opt.verbose) {
         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
       }
-      var args = [name, '--force', '--verbose=' + opt.verbose];
+      var args = [name, '--verbose=' + opt.verbose];
       for(var key in opt)
       {
         if(key != 'base' && key != 'prefix'){
@@ -73,7 +73,7 @@ var getTasks = module.exports.tasks = function (options) {
         if (opt.verbose) {
           grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
         }
-        cb();
+        cb(code);
       });
     };
   }
