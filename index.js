@@ -42,7 +42,7 @@ var getTasks = module.exports.tasks = function (options) {
     grunt.file.setBase(opt.base);
   }
 
-  var gruntCliDir = opt.base ? "" : (opt.base + "/");
+  var gruntCliDir = opt.base ? (opt.base + "/") : "";
 
   grunt.task.init([]);
 
