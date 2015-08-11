@@ -42,6 +42,8 @@ var getTasks = module.exports.tasks = function (options) {
     grunt.file.setBase(opt.base);
   }
 
+  var gruntCliDir = opt.base ? "" : (opt.base + "/");
+
   grunt.task.init([]);
 
   var gruntTasks = grunt.task._tasks,
@@ -60,7 +62,7 @@ var getTasks = module.exports.tasks = function (options) {
         }
       }
       var child = spawn(
-        gruntCmd,
+        gruntCliDir + gruntCmd,
         args
       );
       child.stdout.on('data', function(d) {
