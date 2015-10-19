@@ -4,7 +4,7 @@ var Gulp = require('gulp').Gulp;
 var addGrunt = require('../');
 require('mocha');
 
-describe('gulp-grunt', function () {
+describe('gulp-grunt', function() {
 
   var gulp;
 
@@ -17,18 +17,18 @@ describe('gulp-grunt', function () {
    everything is done asynchronously.
    This also has the advantage of making the output look very clean.
    */
-  var silence = function (silenced) {
-    return function (cb) {
+  var silence = function(silenced) {
+    return function(cb) {
       var out = [],
       // everything back to normal
-        revert = (function (write) {
-          return function () {
+        revert = (function(write) {
+          return function() {
             process.stdout.write = write;
           }
         })(process.stdout.write);
 
       // modify process.stdout
-      process.stdout.write = function (string) {
+      process.stdout.write = function(string) {
         out.push(string);
       };
 
@@ -39,7 +39,7 @@ describe('gulp-grunt', function () {
         cb();
       } else if (silenced.length == 2) {
         // If the function is asynchronous
-        silenced(out, function (err) {
+        silenced(out, function(err) {
           revert();
           if (err) {
             cb(err);
@@ -53,7 +53,7 @@ describe('gulp-grunt', function () {
   };
 
   // Encapsulate the expect clauses on asynchronous silenced functions.
-  var clause = function (fn, done) {
+  var clause = function(fn, done) {
     try {
       fn();
       done();
@@ -62,50 +62,50 @@ describe('gulp-grunt', function () {
     }
   };
 
-  beforeEach(function () {
+  beforeEach(function() {
     gulp = new Gulp;
   });
 
-  it('should load grunt tasks', function () {
+  it('should load grunt tasks', function() {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});
     expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error']);
   });
 
-  it('should still run gulp tasks', function () {
+  it('should still run gulp tasks', function() {
     var ran = false;
 
-    gulp.task('x', function () {
+    gulp.task('x', function() {
       ran = true;
     });
     gulp.run('x');
     expect(ran).to.be.true;
   });
 
-  it('should work with another prefix', function () {
-    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-'});
+  it('should work with another prefix', function() {
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' });
     expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error']);
   });
 
-  it('should work with no prefix', function () {
+  it('should work with no prefix', function() {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: '' });
     expect(gulp.tasks).to.have.keys(['test', 'error']);
   });
 
-  it('should run grunt tasks', silence(function (out, done) {
+  it('should run grunt tasks', silence(function(out, done) {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});
-    gulp.run('grunt-test', function () {
-      clause(function () {
+    gulp.run('grunt-test', function() {
+      clause(function() {
         expect(out).to.include('[test] you should probably see that it has tested\n');
       }, done);
     });
 
   }));
 
-  it('should handle errors gracefully', silence(function (out,done) {
+  it('should handle errors gracefully', silence(function(out,done) {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures') });
 
-    gulp.run('grunt-error', function () {
-      clause(function () {
+    gulp.run('grunt-error', function() {
+      clause(function() {
         var errored = false;
         for (var i = 0; i < out.length; i++) {
           if (out[i].indexOf("[test] you should see this error") != -1) {

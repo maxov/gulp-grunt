@@ -3,7 +3,7 @@ var spawn = require('child_process').spawn;
 
 var gruntCmd = (process.platform === 'win32') ? 'grunt.cmd' : 'grunt';
 
-var makeOptions = function (options) {
+var makeOptions = function(options) {
 
   var baseOptions = {
     base: null,
@@ -23,7 +23,7 @@ var makeOptions = function (options) {
   return baseOptions;
 };
 
-module.exports = function (gulp, options) {
+module.exports = function(gulp, options) {
   var tasks = getTasks(options);
 
   for (var name in tasks) {
@@ -35,13 +35,15 @@ module.exports = function (gulp, options) {
 
 };
 
-var getTasks = module.exports.tasks = function (options) {
+var getTasks = module.exports.tasks = function(options) {
   var opt = makeOptions(options);
 
   var oldCwd = process.cwd();
   var cwd = opt.base != null ? opt.base : oldCwd;
 
   grunt.file.setBase(cwd);
+
+  var gruntCliDir = opt.base ? (opt.base + "/") : "";
 
   grunt.task.init([]);
 
@@ -50,20 +52,19 @@ var getTasks = module.exports.tasks = function (options) {
   var gruntTasks = grunt.task._tasks,
     finalTasks = {};
 
-  function registerGruntTask (name) {
+  function registerGruntTask(name) {
     finalTasks[opt.prefix + name] = function (cb) {
       if (opt.verbose) {
         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
       }
       var args = [name, '--force', '--verbose=' + opt.verbose];
-      for(var key in opt)
-      {
-        if(key != 'base' && key != 'prefix'){
-        args = args.concat('--' + key + '=' + opt[key]);
+      for (var key in opt) {
+        if (key != 'base' && key != 'prefix') {
+          args = args.concat('--' + key + '=' + opt[key]);
         }
       }
       var child = spawn(
-        gruntCmd,
+        gruntCliDir + gruntCmd,
         args,
         {cwd: cwd}
       );

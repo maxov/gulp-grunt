@@ -25,10 +25,5 @@
   "engines": {
     "node": ">= 0.9.0"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://raw.github.com/gratimax/gulp-grunt/master/LICENSE"
-    }
-  ]
+  "license": "MIT"
 }
