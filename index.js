@@ -38,11 +38,14 @@ module.exports = function (gulp, options) {
 var getTasks = module.exports.tasks = function (options) {
   var opt = makeOptions(options);
 
-  if (opt.base) {
-    grunt.file.setBase(opt.base);
-  }
+  var oldCwd = process.cwd();
+  var cwd = opt.base != null ? opt.base : oldCwd;
+
+  grunt.file.setBase(cwd);
 
   grunt.task.init([]);
+
+  process.chdir(oldCwd);
 
   var gruntTasks = grunt.task._tasks,
     finalTasks = {};
@@ -61,7 +64,8 @@ var getTasks = module.exports.tasks = function (options) {
       }
       var child = spawn(
         gruntCmd,
-        args
+        args,
+        {cwd: cwd}
       );
       child.stdout.on('data', function(d) {
         grunt.log.write(d);
