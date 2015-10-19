@@ -3,7 +3,7 @@ var spawn = require('child_process').spawn;
 
 var gruntCmd = (process.platform === 'win32') ? 'grunt.cmd' : 'grunt';
 
-var makeOptions = function(options) {
+var makeOptions = function (options) {
 
   var baseOptions = {
     base: null,
@@ -23,7 +23,7 @@ var makeOptions = function(options) {
   return baseOptions;
 };
 
-module.exports = function(gulp, options) {
+module.exports = function (gulp, options) {
   var tasks = getTasks(options);
 
   for (var name in tasks) {
@@ -35,7 +35,7 @@ module.exports = function(gulp, options) {
 
 };
 
-var getTasks = module.exports.tasks = function(options) {
+var getTasks = module.exports.tasks = function (options) {
   var opt = makeOptions(options);
 
   var oldCwd = process.cwd();
@@ -68,13 +68,13 @@ var getTasks = module.exports.tasks = function(options) {
         args,
         {cwd: cwd}
       );
-      child.stdout.on('data', function(d) {
+      child.stdout.on('data', function (d) {
         grunt.log.write(d);
       });
-      child.stderr.on('data', function(d) {
+      child.stderr.on('data', function (d) {
         grunt.log.error(d);
       });
-       child.on('close', function(code) {
+       child.on('close', function (code) {
         if (opt.verbose) {
           grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
         }
