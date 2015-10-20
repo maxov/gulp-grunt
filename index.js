@@ -52,7 +52,7 @@ var getTasks = module.exports.tasks = function (options) {
   var gruntTasks = grunt.task._tasks,
     finalTasks = {};
 
-  function registerGruntTask(name) {
+  var registerGruntTask = function (name) {
     finalTasks[opt.prefix + name] = function (cb) {
       if (opt.verbose) {
         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
@@ -74,7 +74,7 @@ var getTasks = module.exports.tasks = function (options) {
       child.stderr.on('data', function (d) {
         grunt.log.error(d);
       });
-       child.on('close', function (code) {
+      child.on('close', function (code) {
         if (opt.verbose) {
           grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
         }
