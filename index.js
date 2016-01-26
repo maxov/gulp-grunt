@@ -64,7 +64,7 @@ var getTasks = module.exports.tasks = function (options) {
         }
       }
       var child = spawn(
-        gruntCliDir + gruntCmd,
+        gruntCmd,
         args,
         {cwd: cwd}
       );
