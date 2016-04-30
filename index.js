@@ -6,6 +6,7 @@ var gruntCmd = (process.platform === 'win32') ? 'grunt.cmd' : 'grunt';
 var makeOptions = function (options) {
 
   var baseOptions = {
+    path: null,
     base: null,
     prefix: 'grunt-',
     verbose: false
@@ -43,7 +44,7 @@ var getTasks = module.exports.tasks = function (options) {
 
   grunt.file.setBase(cwd);
 
-  var gruntCliDir = opt.base ? (opt.base + "/") : "";
+  var gruntCliDir = opt.path ? (opt.path + "/") : "";
 
   grunt.task.init([]);
 
