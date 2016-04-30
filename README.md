@@ -51,6 +51,7 @@ __Takes__ `(gulp, options)`
 Configuration is done with the function call:
 ```js
 require('gulp-grunt')(gulp, {
+  path: ...,
   base: ...,
   prefix: ...
 });
@@ -94,6 +95,9 @@ You can simply pass in an empty string(`''`) if you wish to have no prefix.
 #### options.verbose
 If this option is enabled(true), then gulp-grunt will tell you when it starts running a Grunt task or stops it.
 This option is mainly for debugging.
+
+#### options.path
+This tells gulp-grunt where to look for grunt executable.
 
 #### default options
 
