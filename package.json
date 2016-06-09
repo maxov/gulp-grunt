@@ -1,7 +1,7 @@
 {
   "name": "gulp-grunt",
   "description": "Run grunt tasks from gulp",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "homepage": "http://github.com/gratimax/gulp-grunt",
   "repository": "git://github.com/gratimax/gulp-grunt.git",
   "author": "gratimax <max@ovsankin.com>",
