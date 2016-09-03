@@ -8,7 +8,8 @@ var makeOptions = function (options) {
   var baseOptions = {
     base: null,
     prefix: 'grunt-',
-    verbose: false
+    verbose: false,
+    force: true
   };
 
   if (options) {
@@ -57,7 +58,7 @@ var getTasks = module.exports.tasks = function (options) {
       if (opt.verbose) {
         console.log('[grunt-gulp] Running Grunt "' + name + '" task...');
       }
-      var args = [name, '--force', '--verbose=' + opt.verbose];
+      var args = opt.force ?  [name, '--force', '--verbose=' + opt.verbose] : [name, '--verbose=' + opt.verbose];
       for (var key in opt) {
         if (key != 'base' && key != 'prefix') {
           args = args.concat('--' + key + '=' + opt[key]);
@@ -78,6 +79,9 @@ var getTasks = module.exports.tasks = function (options) {
         if (opt.verbose) {
           grunt.log.ok('[grunt-gulp] Done running Grunt "' + name + '" task.');
         }
+        if (code != 0) {
+    	     grunt.fail.warn('[grunt-gulp] Failed running Grunt "' + name + '" task.')
+    	  }
         cb();
       });
     };

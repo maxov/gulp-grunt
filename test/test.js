@@ -68,7 +68,7 @@ describe('gulp-grunt', function () {
 
   it('should load grunt tasks', function () {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});
-    expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error']);
+    expect(gulp.tasks).to.have.keys(['grunt-test', 'grunt-error', 'grunt-epic-error']);
   });
 
   it('should still run gulp tasks', function () {
@@ -83,13 +83,23 @@ describe('gulp-grunt', function () {
 
   it('should work with another prefix', function () {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: 'gr-' });
-    expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error']);
+    expect(gulp.tasks).to.have.keys(['gr-test', 'gr-error', 'gr-epic-error']);
   });
 
   it('should work with no prefix', function () {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), prefix: '' });
-    expect(gulp.tasks).to.have.keys(['test', 'error']);
+    expect(gulp.tasks).to.have.keys(['test', 'error', 'epic-error']);
   });
+
+  it('should run grunt tasks, which fails', silence(function (out, done) {
+    addGrunt(gulp, { base: path.join(__dirname, 'fixtures'), force: false});
+    gulp.run('grunt-epic-error', function () {
+      clause(function () {
+        expect(out).to.include('[test] I am totally failed\n');
+      }, done);
+    });
+
+  }));
 
   it('should run grunt tasks', silence(function (out, done) {
     addGrunt(gulp, { base: path.join(__dirname, 'fixtures')});

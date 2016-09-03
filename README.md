@@ -95,13 +95,17 @@ You can simply pass in an empty string(`''`) if you wish to have no prefix.
 If this option is enabled(true), then gulp-grunt will tell you when it starts running a Grunt task or stops it.
 This option is mainly for debugging.
 
+#### options.force
+If this option set to `true`, grunt task will never fail, but just give you a warning instead.
+
 #### default options
 
 ```js
 {
   base: null, // this is just the directory that your Gulpfile is in
   prefix: 'grunt-',
-  verbose: false
+  verbose: false,
+  force: true
 }
 ```
 

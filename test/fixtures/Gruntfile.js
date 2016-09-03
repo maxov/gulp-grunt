@@ -9,4 +9,9 @@ module.exports = function (grunt) {
     return false;
   });
 
+  grunt.registerTask('epic-error', 'should interupt build', function() {
+    grunt.fail.warn('[test] I am totally failed');
+    return false;
+  });
+
 };
