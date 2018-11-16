@@ -60,7 +60,7 @@ var getTasks = module.exports.tasks = function (options) {
       }
       var args = opt.force ?  [name, '--force', '--verbose=' + opt.verbose] : [name, '--verbose=' + opt.verbose];
       for (var key in opt) {
-        if (key != 'base' && key != 'prefix') {
+        if (key != 'base' && key != 'prefix' && key != 'force') {
           args = args.concat('--' + key + '=' + opt[key]);
         }
       }
